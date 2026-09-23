@@ -249,7 +249,12 @@ input {
 
 .book-page.is-dedication .page-text {
   max-width: 760px;
+  padding: clamp(24px, 4cqw, 46px);
+  border: 1px solid rgba(176, 131, 42, 0.2);
+  border-radius: clamp(18px, 3cqw, 32px);
   color: #3f3325;
+  background: rgba(255, 253, 247, 0.82);
+  box-shadow: 0 18px 50px rgba(91, 70, 34, 0.1);
   font-weight: 560;
   line-height: 1.8;
   white-space: pre-line;
