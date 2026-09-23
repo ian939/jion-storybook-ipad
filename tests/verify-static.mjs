@@ -51,6 +51,8 @@ const app = readText("app.js");
 assert(html.includes("user-scalable=no") && html.includes("maximum-scale=1"), "Viewport lock is incomplete");
 assert(html.includes("PretendardVariable.ttf") || css.includes("PretendardVariable.ttf"), "Pretendard font is missing");
 assert(css.includes("aspect-ratio: 1 / 1"), "Square book layout is missing");
+assert(css.includes('font-family: "Pretendard"') && css.includes("font-size: 20px"), "Unified Pretendard typography is missing");
+assert(css.includes(".page-copy") && css.includes("overflow: hidden"), "Text-area overflow protection is missing");
 assert(css.includes("touch-action: pan-y"), "Single-finger vertical touch policy is missing");
 assert(css.includes("-webkit-touch-callout: none"), "Long-press protection is missing");
 assert(css.includes("user-select: none"), "Text-selection protection is missing");

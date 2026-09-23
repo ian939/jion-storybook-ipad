@@ -16,6 +16,18 @@ npm start
 npm test
 ```
 
+Playwright가 설치된 환경에서는 26쪽을 세 가지 iPad 화면 크기로 실제 렌더링해 글 영역 침범 여부와 스크린샷을 확인할 수 있습니다.
+
+```powershell
+npm run test:playwright
+```
+
+본문은 모든 페이지에서 `Pretendard` 20px로 통일되어 있습니다.
+
+## GitHub Pages 배포
+
+`main` 브랜치에 푸시하면 `.github/workflows/deploy-pages.yml`이 정적 사이트를 만들고 GitHub Pages에 자동 배포합니다.
+
 ## 조작
 
 - 화면 오른쪽 탭 또는 왼쪽 스와이프: 다음 쪽

@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node server.mjs",
     "dev": "node server.mjs",
-    "test": "node tests/verify-static.mjs"
+    "test": "node tests/verify-static.mjs",
+    "test:playwright": "python tests/verify_playwright.py",
+    "build:pages": "node scripts/build_site.mjs"
   }
 }
