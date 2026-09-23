@@ -1,4 +1,4 @@
-const CACHE_NAME = "jion-storybook-v4";
+const CACHE_NAME = "jion-storybook-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
