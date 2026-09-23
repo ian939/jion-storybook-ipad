@@ -58,6 +58,7 @@ def main() -> None:
             page.evaluate("localStorage.clear()")
             page.reload(wait_until="networkidle")
             page.evaluate("document.fonts.ready")
+            page.wait_for_timeout(2800)
 
             results = [inspect_page(page, number) for number in range(1, 27)]
             for result in results:

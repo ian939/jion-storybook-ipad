@@ -320,7 +320,7 @@ input {
   position: fixed;
   z-index: 20;
   left: 50%;
-  bottom: calc(82px + env(safe-area-inset-bottom));
+  bottom: max(env(safe-area-inset-bottom), 10px);
   max-width: calc(100vw - 40px);
   padding: 12px 18px;
   border: 1px solid rgba(255, 255, 255, 0.16);
