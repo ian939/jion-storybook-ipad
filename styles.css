@@ -228,6 +228,33 @@ input {
   overflow-wrap: break-word;
 }
 
+.book-page.is-dedication {
+  grid-template-rows: 1fr;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 220, 113, 0.42), transparent 23%),
+    radial-gradient(circle at 84% 80%, rgba(133, 166, 255, 0.34), transparent 28%),
+    linear-gradient(145deg, #fffaf0, #f6edda);
+}
+
+.book-page.is-dedication .page-art-frame {
+  display: none;
+}
+
+.book-page.is-dedication .page-copy {
+  padding: clamp(34px, 7cqw, 78px);
+  background:
+    radial-gradient(circle, rgba(222, 168, 43, 0.28) 0 2px, transparent 2.5px) 0 0 / 44px 44px,
+    transparent;
+}
+
+.book-page.is-dedication .page-text {
+  max-width: 760px;
+  color: #3f3325;
+  font-weight: 560;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
 .page-spine {
   position: absolute;
   z-index: 8;

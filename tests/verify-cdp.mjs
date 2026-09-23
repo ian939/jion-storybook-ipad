@@ -130,7 +130,7 @@ async function main() {
     };
   })()`);
 
-  assert(layout.pages === 26, `Expected 26 pages, received ${layout.pages}`);
+  assert(layout.pages === 27, `Expected 27 pages, received ${layout.pages}`);
   assert(layout.current === 1, `Expected page 1, received ${layout.current}`);
   assert(Math.abs(layout.stage.width - layout.stage.height) < 2, "Book stage is not square");
   assert(Math.abs(layout.artRatio - 2 / 3) < 0.03, `Artwork ratio is ${layout.artRatio}`);
@@ -158,9 +158,9 @@ async function main() {
   await sleep(850);
   assert((await evaluate(client, "window.__storybookApp.currentPage")) === 2, "Swipe did not advance the page");
 
-  await evaluate(client, "window.__storybookApp.goTo(26)");
+  await evaluate(client, "window.__storybookApp.goTo(27)");
   await sleep(100);
-  assert((await evaluate(client, "window.__storybookApp.currentPage")) === 26, "Could not open the last page");
+  assert((await evaluate(client, "window.__storybookApp.currentPage")) === 27, "Could not open the last page");
   await screenshot(client, "ipad-landscape.png");
 
   await evaluate(client, "window.__storybookApp.goTo(1)");

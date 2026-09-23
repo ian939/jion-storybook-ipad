@@ -16,6 +16,13 @@ SOURCE_FONT = WORKSPACE_ROOT / "assets" / "fonts" / "PretendardVariable.ttf"
 IMAGE_DIR = REPO_ROOT / "public" / "images"
 FONT_DIR = REPO_ROOT / "public" / "fonts"
 DATA_FILE = REPO_ROOT / "story-data.js"
+DEDICATION_TEXT = """사랑하는 지온이의 6번째 생일을 너무 축하해.
+
+지온이와 포켓몬 친구들이 함께하는 ‘생일별’ 이야기도
+즐겁게 읽고 재밌었으면 좋겠다!
+
+멋지고 훌륭하게 자라줘서 고마워
+사랑해 아들 :)"""
 
 
 def read_pages() -> list[dict[str, object]]:
@@ -72,7 +79,13 @@ def main() -> None:
     IMAGE_DIR.mkdir(parents=True, exist_ok=True)
     FONT_DIR.mkdir(parents=True, exist_ok=True)
 
-    exported = []
+    exported = [
+        {
+            "number": 1,
+            "kind": "dedication",
+            "text": DEDICATION_TEXT,
+        }
+    ]
     for page in pages:
         number = int(page["number"])
         source_image = SOURCE_DIR / str(page["source"])
@@ -82,7 +95,7 @@ def main() -> None:
         export_image(source_image, IMAGE_DIR / output_name)
         exported.append(
             {
-                "number": number,
+                "number": number + 1,
                 "image": f"public/images/{output_name}",
                 "text": str(page["text"]),
             }

@@ -19,7 +19,8 @@
   const bookTitle = document.querySelector("#book-title");
 
   const totalPages = story.pages.length;
-  const storedPage = Number.parseInt(localStorage.getItem("jion-storybook-page") || "1", 10);
+  const storageKey = "jion-storybook-page-v2";
+  const storedPage = Number.parseInt(localStorage.getItem(storageKey) || "1", 10);
   let pageIndex = Number.isFinite(storedPage)
     ? Math.min(Math.max(storedPage - 1, 0), totalPages - 1)
     : 0;
@@ -34,17 +35,25 @@
   function fillPage(pageElement, page) {
     const image = pageElement.querySelector(".page-art");
     const text = pageElement.querySelector(".page-text");
-    image.src = page.image;
-    image.alt = `${page.number}쪽 삽화`;
+    const isDedication = page.kind === "dedication";
+    pageElement.classList.toggle("is-dedication", isDedication);
+    if (page.image) {
+      image.src = page.image;
+      image.alt = `${page.number}쪽 삽화`;
+    } else {
+      image.removeAttribute("src");
+      image.alt = "";
+    }
     image.draggable = false;
     text.textContent = page.text;
-    pageElement.setAttribute("aria-label", `${page.number}쪽`);
+    pageElement.setAttribute("aria-label", isDedication ? "생일 축하 메시지" : `${page.number}쪽`);
   }
 
   function preloadAround(index) {
     [index - 1, index + 1, index + 2]
       .filter((candidate) => candidate >= 0 && candidate < totalPages)
       .forEach((candidate) => {
+        if (!story.pages[candidate].image) return;
         const image = new Image();
         image.src = story.pages[candidate].image;
       });
@@ -57,7 +66,7 @@
     pageSlider.value = String(pageNumber);
     previousButton.disabled = pageIndex === 0;
     nextButton.disabled = pageIndex === totalPages - 1;
-    localStorage.setItem("jion-storybook-page", String(pageNumber));
+    localStorage.setItem(storageKey, String(pageNumber));
     preloadAround(pageIndex);
   }
 

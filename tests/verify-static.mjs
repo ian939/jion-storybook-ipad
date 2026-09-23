@@ -34,16 +34,22 @@ const context = { window: {} };
 vm.runInNewContext(readText("story-data.js"), context);
 const story = context.window.STORYBOOK;
 assert(story?.title === "지온과 사라진 생일별", "Story title is missing");
-assert(story.pages.length === 26, `Expected 26 pages, received ${story.pages.length}`);
+assert(story.pages.length === 27, `Expected 27 pages, received ${story.pages.length}`);
+assert(story.pages[0].kind === "dedication", "The dedication must be the first page");
+assert(story.pages[0].text.includes("사랑하는 지온이의 6번째 생일"), "The dedication message is missing");
 
+let artworkCount = 0;
 for (const [index, page] of story.pages.entries()) {
   assert(page.number === index + 1, `Page number mismatch at ${index + 1}`);
   assert(page.text.trim().length > 0, `Page ${page.number} has no story text`);
+  if (page.kind === "dedication") continue;
+  artworkCount += 1;
   const imagePath = path.join(root, page.image);
   assert(fs.existsSync(imagePath), `Page ${page.number} image is missing`);
   const size = jpegSize(fs.readFileSync(imagePath));
   assert(Math.abs(size.width / size.height - 1.5) < 0.01, `Page ${page.number} image is not 3:2`);
 }
+assert(artworkCount === 26, `Expected 26 artwork pages, received ${artworkCount}`);
 
 const html = readText("index.html");
 const css = readText("styles.css");
@@ -69,7 +75,7 @@ for (const endpoint of endpoints) {
   await response.arrayBuffer();
 }
 
-console.log("✓ 26-page story data");
+console.log("✓ Dedication plus 26 story pages");
 console.log("✓ 26 artwork files at 3:2 ratio");
 console.log("✓ Square iPad layout and Pretendard font");
 console.log("✓ Page-turn controls and kid-safe touch guardrails");

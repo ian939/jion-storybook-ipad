@@ -60,7 +60,9 @@ def main() -> None:
             page.evaluate("document.fonts.ready")
             page.wait_for_timeout(2800)
 
-            results = [inspect_page(page, number) for number in range(1, 27)]
+            total_pages = page.evaluate("window.__storybookApp.totalPages")
+            assert total_pages == 27
+            results = [inspect_page(page, number) for number in range(1, total_pages + 1)]
             for result in results:
                 assert result["fontSize"] == "20px", result
                 assert "Pretendard" in str(result["fontFamily"]), result
@@ -80,7 +82,7 @@ def main() -> None:
     (OUTPUT / "playwright-layout-report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print("Playwright verified all 26 pages at three iPad viewports.")
+    print("Playwright verified all 27 pages at three iPad viewports.")
 
 
 if __name__ == "__main__":
