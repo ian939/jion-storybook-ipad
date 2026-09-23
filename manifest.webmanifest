@@ -1,0 +1,11 @@
+{
+  "name": "지온과 사라진 생일별",
+  "short_name": "지온의 생일별",
+  "description": "지온이와 포켓몬 친구들의 생일 모험 그림책",
+  "lang": "ko-KR",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#17162a",
+  "theme_color": "#17162a"
+}
